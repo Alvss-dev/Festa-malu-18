@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malu • 18 anos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Você está convidado(a) para comemorar os 18 anos da Malu 🎉</h1>
+    <p>Malu • 18 anos</p>
+    <p>📅 21 de Fevereiro • ⏰ 15h • 📍 Espaço Salão de Festa</p>
+    <button onclick="document.getElementById('rsvp').scrollIntoView({behavior:'smooth'})">
+      Confirmar Presença
+    </button>
+  </section>
+
+  <!-- INFORMAÇÕES -->
+  <section>
+    <h2>Informações do Evento</h2>
+    <p>📅 Data: 21/02/2026</p>
+    <p>⏰ Horário: 15h</p>
+    <p>📍 Local: Espaço Praia Azul 
+      <a href="https://share.google/daFfZhXEBqeJHChpb" target="_blank">Ver no mapa</a>
+    </p>
+    <p>✨ Traje Obrigatório: Roupa Branca</p>
+  </section>
+
+  <!-- FORMULÁRIO RSVP -->
+  <section id="rsvp">
+    <h2>Confirme sua Presença</h2>
+    <form id="rsvpForm">
+      <input type="text" name="nome" placeholder="Nome completo" required>
+      <select name="presenca" required>
+        <option value="">Vai comparecer?</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+      <input type="number" name="acompanhates" placeholder="Quantidade de pessoas" min="1">
+      <textarea name="observacao" placeholder="Observação (opcional)"></textarea>
+      <button type="submit">Confirmar Presença</button>
+    </form>
+    <div class="counter" id="counter">0 pessoas já confirmaram 🎉</div>
+    <div id="listaConfirmados"></div>
+    <div id="mensagem"></div>
+  </section>
+
+  <script>
+    // Contador e lista de confirmações
+    let confirmados = 0;
+    let nomesConfirmados = [];
+
+    document.getElementById('rsvpForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const nome = formData.get('nome');
+      const presenca = formData.get('presenca');
+
+      if(presenca === "Sim"){
+        confirmados++;
+        nomesConfirmados.push(nome);
+
+        // Atualiza contador
+        document.getElementById('counter').innerText = confirmados + " pessoas já confirmaram 🎉";
+
+        // Atualiza lista
+        let listaHTML = "<h3>Lista de Confirmados:</h3><ul>";
+        nomesConfirmados.forEach(n => {
+          listaHTML += "<li>" + n + "</li>";
+        });
+        listaHTML += "</ul>";
+        document.getElementById('listaConfirmados').innerHTML = listaHTML;
+      }
+
+      // Mensagem amigável
+      document.getElementById('mensagem').innerHTML = 
+        "<p>Presença confirmada! A Malu espera você para comemorar esse momento especial 🌊💙</p>";
+
+      // ===== Envio para Formspree =====
+      fetch("https://formspree.io/f/mzdznzvk", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => console.log("Enviado para o Formspree!"));
+
+      this.reset();
+    });
+  </script>
+</body>
+</html>

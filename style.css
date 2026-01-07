@@ -1,0 +1,67 @@
+/* ======== ESTILO GERAL ======== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #87CEFA, #ffffff);
+  color: #003366;
+  text-align: center;
+}
+h1, h2 {
+  margin: 0.5em 0;
+}
+section {
+  padding: 40px 20px;
+}
+button {
+  background: #0077b6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0096c7;
+}
+
+/* ======== HERO ======== */
+.hero {
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+  color: white;
+  padding: 100px 20px;
+}
+.hero h1 {
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px #000;
+}
+.hero p {
+  font-size: 1.2em;
+  text-shadow: 1px 1px 3px #000;
+}
+
+/* ======== FORM ======== */
+form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #0077b6;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.counter {
+  font-size: 1.2em;
+  margin-top: 20px;
+  color: #0077b6;
+}
+
+/* ======== RESPONSIVO ======== */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8em; }
+  .hero p { font-size: 1em; }
+}
